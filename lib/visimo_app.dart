@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_visimo/screens/signin_screen.dart';
-import 'package:flutter_visimo/screens/welcome/welcome_screen.dart';
+import 'package:flutter_visimo/screens/start/start_screen.dart';
 // import 'package:flutter_visimo/theme/colors.dart';
 import 'package:flutter_visimo/theme/dark_theme.dart';
 
@@ -29,7 +29,7 @@ class _VisimoState extends State<Visimo> {
       // home: Test(
       //   key: UniqueKey(),
       // ),
-      home: const WelcomeScreen(
+      home: const StartScreen(
           // toggle: toggle,
           // UniqueKey(), Need to prevent error: "A GlobalKey was used multiple times inside one widget's child list"
           // key: UniqueKey(),

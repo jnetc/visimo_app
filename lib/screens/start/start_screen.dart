@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_visimo/screens/welcome/widgets/create_account.dart';
-import 'package:flutter_visimo/screens/welcome/widgets/have_account.dart';
+import 'package:flutter_visimo/screens/start/widgets/create_account.dart';
+import 'package:flutter_visimo/screens/start/widgets/have_account.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+class StartScreen extends StatelessWidget {
+  const StartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

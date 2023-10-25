@@ -25,6 +25,7 @@ final lightTheme = ThemeData(
     onSecondary: VisimoColors.lightGreenAlt,
     tertiary: VisimoColors.lightBlue,
     onTertiary: VisimoColors.lightBlueAlt,
+    surface: VisimoColors.lightSurface,
   ),
   scaffoldBackgroundColor: VisimoColors.lightBackdrop,
 
