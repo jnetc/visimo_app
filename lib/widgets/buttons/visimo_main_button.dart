@@ -46,6 +46,7 @@ class _VisimoMainButtonState extends State<VisimoMainButton> {
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 100),
+      constraints: const BoxConstraints(maxHeight: 66),
       width: double.infinity,
       curve: Curves.easeInOut,
       transform: Matrix4.translationValues(0, transform, 0),

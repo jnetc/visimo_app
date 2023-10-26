@@ -20,7 +20,7 @@ class StartScreen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
           ),
           const Padding(
-            padding: EdgeInsets.only(bottom: 48, left: 16, right: 16),
+            padding: EdgeInsets.only(bottom: 32, left: 16, right: 16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
