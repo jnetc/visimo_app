@@ -16,7 +16,7 @@ class MainSignInSignUpLayout extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const TitleLarge(text: 'Login to your\naccount'),
+        const HeadlineLarge(text: 'Login to your\naccount'),
         const SizedBox(height: 48),
         VisimoMainButton(
           buttonName: 'Continue with Google',

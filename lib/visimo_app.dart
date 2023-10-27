@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_visimo/screens/signin_screen.dart';
-import 'package:flutter_visimo/screens/start/start_screen.dart';
-// import 'package:flutter_visimo/theme/colors.dart';
-import 'package:flutter_visimo/theme/dark_theme.dart';
+import 'package:flutter/services.dart'; // need for orientation
 
-// import 'package:flutter_visimo/screens/signup_screen.dart';
-// import 'package:flutter_visimo/theme/extension_theme.dart';
+import 'package:flutter_visimo/screens/start/start_screen.dart';
+import 'package:flutter_visimo/theme/dark_theme.dart';
 import 'package:flutter_visimo/theme/light_theme.dart';
 
 class Visimo extends StatefulWidget {
@@ -20,11 +17,28 @@ class _VisimoState extends State<Visimo> {
   void toggle() => setState(() => isDarkTheme = !isDarkTheme);
 
   @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+  }
+
+  @override
+  dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+
       // debugShowCheckedModeBanner: false,
       // home: Test(
       //   key: UniqueKey(),

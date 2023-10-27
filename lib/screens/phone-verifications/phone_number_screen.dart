@@ -28,7 +28,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
         physics: const NeverScrollableScrollPhysics(),
         // mainAxisSize: MainAxisSize.max,
         children: [
-          const TitleLarge(text: 'What’s your phone\nnumber?'),
+          const HeadlineLarge(text: 'What’s your phone\nnumber?'),
           const SizedBox(height: 48),
           TextFormField(
             controller: _phoneController,

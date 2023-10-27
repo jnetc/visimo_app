@@ -26,6 +26,7 @@ final lightTheme = ThemeData(
     tertiary: VisimoColors.lightBlue,
     onTertiary: VisimoColors.lightBlueAlt,
     surface: VisimoColors.lightSurface,
+    background: VisimoColors.lightBackdrop,
   ),
   scaffoldBackgroundColor: VisimoColors.lightBackdrop,
 
@@ -44,13 +45,40 @@ final lightTheme = ThemeData(
       error: VisimoColors.lightRed,
     ),
   ),
-
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: VisimoColors.lightSurface,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(
+        color: Colors.white,
+      ),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(
+        color: VisimoColors.lightRedAlt,
+      ),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(
+        color: Colors.black,
+      ),
+    ),
+    hintStyle: const TextStyle(
+      color: Colors.grey,
+      fontSize: 16,
+    ),
+  ),
   textTheme: const TextTheme(
     bodySmall: TextStyle(
       color: VisimoColors.grey800,
       fontSize: 16,
+      decoration: TextDecoration.none,
+      decorationThickness: 0,
     ),
-    titleLarge: TextStyle(
+    headlineLarge: TextStyle(
       color: VisimoColors.grey800,
       fontSize: 36,
       fontWeight: FontWeight.bold,

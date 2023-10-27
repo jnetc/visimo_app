@@ -8,18 +8,13 @@ class VerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final flexSize = MediaQuery.of(context);
-    const double boxSize = 48;
-
-    print(flexSize);
-
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
         padding: const EdgeInsets.only(right: 16, top: 16, left: 16),
-        physics: const NeverScrollableScrollPhysics(),
+        // physics: const NeverScrollableScrollPhysics(),s
         children: [
-          const TitleLarge(text: 'Enter verification\ncode'),
+          const HeadlineLarge(text: 'Enter verification\ncode'),
           const SizedBox(height: 48),
           const Row(
             // crossAxisAlignment: CrossAxisAlignment.stretch,

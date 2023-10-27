@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // COMPONENTS
 import 'package:flutter_visimo/icons/icons.dart';
+import 'package:flutter_visimo/screens/create-account/username/username_screen.dart';
 import 'package:flutter_visimo/screens/phone-verifications/phone_number_screen.dart';
 import 'package:flutter_visimo/screens/sign-up/signup_screen.dart';
 import 'package:flutter_visimo/widgets/screen-elements/visimo_txt_and_anchor.dart';
@@ -14,46 +15,66 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Keyboard will overlay all bottom widgets
+      // Also resolve error: A RenderFlex overflowed by 167 pixels on the bottom.
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
-      body: ListView(
-        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          const TitleLarge(text: 'Login to your\naccount'),
-          const SizedBox(height: 48),
-          VisimoMainButton(
-            buttonName: 'Continue with Google',
-            handler: () {},
-            icon: googleAccountIcon,
-          ),
-          const SizedBox(height: 18),
-          VisimoMainButton(
-            buttonName: 'Continue with Apple',
-            handler: () {},
-            icon: appleAccountIcon,
-          ),
-          const SizedBox(height: 32),
-          const DividerWithText(),
-          const SizedBox(height: 32),
-          VisimoMainButton(
-            buttonName: 'Phone number',
-            handler: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PhoneNumberScreen(),
-                ),
-              );
-            },
-            icon: phoneIcon,
-          ),
-          const SizedBox(height: 24),
-          const SwitchBetweenSignInSignUp(
-            text: 'Don\'t have an account yet?',
-            anchorName: 'Sign Up',
-            widget: SignUpScreen(),
-          ),
-        ],
+      body: Padding(
+        padding:
+            const EdgeInsets.only(top: 16, right: 16, bottom: 32, left: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const HeadlineLarge(text: 'Login to your\naccount'),
+            const SizedBox(height: 48),
+            VisimoMainButton(
+              buttonName: 'Continue with Google',
+              handler: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UsernameScreen(),
+                  ),
+                );
+              },
+              icon: googleAccountIcon,
+            ),
+            const SizedBox(height: 18),
+            VisimoMainButton(
+              buttonName: 'Continue with Apple',
+              handler: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UsernameScreen(),
+                  ),
+                );
+              },
+              icon: appleAccountIcon,
+            ),
+            const SizedBox(height: 32),
+            const DividerWithText(),
+            const SizedBox(height: 32),
+            VisimoMainButton(
+              buttonName: 'Phone number',
+              handler: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PhoneNumberScreen(),
+                  ),
+                );
+              },
+              icon: phoneIcon,
+            ),
+            const SizedBox(height: 24),
+            const SwitchBetweenSignInSignUp(
+              text: 'Don\'t have an account yet?',
+              anchorName: 'Sign Up',
+              widget: SignUpScreen(),
+            ),
+          ],
+        ),
       ),
     );
   }

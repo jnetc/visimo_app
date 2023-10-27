@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 // COMPONENTS
 import 'package:flutter_visimo/icons/icons.dart';
+import 'package:flutter_visimo/screens/create-account/username/username_screen.dart';
 import 'package:flutter_visimo/screens/phone-verifications/phone_number_screen.dart';
 import 'package:flutter_visimo/screens/sign-in/signin_screen.dart';
 import 'package:flutter_visimo/screens/sign-up/widgets/terms_and_policy.dart';
@@ -20,27 +20,46 @@ class SignUpScreen extends StatelessWidget {
     // To make a flexible gap between the last and previous element in the SingleChildScrollView and Spacer
     // We need those three values for calc the height of the Container
     // This will avoid error if we return back to this screen from PhoneNumberScreen
-    // final fullHeight = MediaQuery.of(context).size.height;
+    // final double fullHeight = MediaQuery.of(context).size.height;
     // final topPadding = MediaQuery.of(context).viewPadding.top;
     // final appBarHeight = AppBar().preferredSize.height;
 
     return Scaffold(
+      // Keyboard will overlay all bottom widgets
+      // Also resolve error: A RenderFlex overflowed by 167 pixels on the bottom.
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
-      body: ListView(
-          padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-          physics: const NeverScrollableScrollPhysics(),
+      body: Padding(
+        padding:
+            const EdgeInsets.only(top: 16, right: 16, bottom: 32, left: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const TitleLarge(text: 'Create a new\naccount'),
+            const HeadlineLarge(text: 'Create a new\naccount'),
             const SizedBox(height: 48),
             VisimoMainButton(
               buttonName: 'Continue with Google',
-              handler: () {},
+              handler: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UsernameScreen(),
+                  ),
+                );
+              },
               icon: googleAccountIcon,
             ),
             const SizedBox(height: 18),
             VisimoMainButton(
               buttonName: 'Continue with Apple',
-              handler: () {},
+              handler: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UsernameScreen(),
+                  ),
+                );
+              },
               icon: appleAccountIcon,
             ),
             const SizedBox(height: 32),
@@ -64,10 +83,10 @@ class SignUpScreen extends StatelessWidget {
               anchorName: 'Sign In',
               widget: SignInScreen(),
             ),
-          ]),
-      bottomNavigationBar: const Padding(
-        padding: EdgeInsets.only(right: 16, left: 16, bottom: 32),
-        child: TermsAndPolicy(),
+            const Spacer(),
+            const TermsAndPolicy(),
+          ],
+        ),
       ),
     );
   }
