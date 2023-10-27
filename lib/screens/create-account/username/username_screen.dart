@@ -24,43 +24,58 @@ class _UsernameScreenState extends State<UsernameScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding:
-            const EdgeInsets.only(top: 16, right: 16, bottom: 32, left: 16),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const HeadlineLarge(text: 'What\'s your\nusername'),
-            const SizedBox(height: 48),
-            TextFormField(
-              controller: _usernameController,
-              cursorColor: Colors.black,
-              enableSuggestions: false,
-              autocorrect: false,
-              enableIMEPersonalizedLearning: false,
-              maxLength: 45,
-              spellCheckConfiguration: const SpellCheckConfiguration.disabled(),
-              keyboardAppearance: Brightness.dark,
-              decoration:
-                  const InputDecoration().copyWith(hintText: 'Your username'),
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: Colors.black,
-                  ),
-            ),
-            const SizedBox(height: 48),
-            const Spacer(),
-            VisimoMainButton(
-              buttonName: 'Continue',
-              handler: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SelectImageScreen(),
-                  ),
-                );
-              },
-            ),
-          ],
+        padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const HeadlineLarge(text: 'What\'s your\nusername'),
+              const SizedBox(height: 48),
+              TextFormField(
+                controller: _usernameController,
+                cursorColor: Colors.black,
+                enableSuggestions: false,
+                autocorrect: false,
+                enableIMEPersonalizedLearning: false,
+                maxLength: 45,
+                spellCheckConfiguration:
+                    const SpellCheckConfiguration.disabled(),
+                keyboardAppearance: Brightness.dark,
+                decoration:
+                    const InputDecoration().copyWith(hintText: 'Your username'),
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.black,
+                    ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Your name is used in your profile and will be visible to the Visimo chats and global map.',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(height: 48),
+              Image.asset(
+                'assets/illustrations/username-screen.png',
+                color: Theme.of(context).scaffoldBackgroundColor,
+                colorBlendMode: BlendMode.multiply,
+                alignment: Alignment.topCenter,
+              )
+              // const Spacer(),
+            ],
+          ),
+        ),
+      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.only(right: 16, bottom: 32, left: 16),
+        child: VisimoMainButton(
+          buttonName: 'Continue',
+          handler: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SelectImageScreen(),
+              ),
+            );
+          },
         ),
       ),
     );

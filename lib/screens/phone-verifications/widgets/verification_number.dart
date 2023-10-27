@@ -7,10 +7,7 @@ class VerificationNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final flexSize = MediaQuery.of(context);
     const double boxSize = 56;
-
-    print(flexSize);
 
     return Expanded(
       child: Container(
