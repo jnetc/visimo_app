@@ -21,13 +21,13 @@ class MainSignInSignUpLayout extends StatelessWidget {
         VisimoMainButton(
           buttonName: 'Continue with Google',
           handler: () {},
-          icon: googleAccountIcon,
+          hasIcon: googleAccountIcon,
         ),
         const SizedBox(height: 18),
         VisimoMainButton(
           buttonName: 'Continue with Apple',
           handler: () {},
-          icon: appleAccountIcon,
+          hasIcon: appleAccountIcon,
         ),
         const SizedBox(height: 32),
         const DividerWithText(),
@@ -42,7 +42,7 @@ class MainSignInSignUpLayout extends StatelessWidget {
               ),
             );
           },
-          icon: phoneIcon,
+          hasIcon: phoneIcon,
         ),
         const SizedBox(height: 24),
         const SwitchBetweenSignInSignUp(

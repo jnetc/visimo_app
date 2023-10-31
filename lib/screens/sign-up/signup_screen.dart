@@ -47,7 +47,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 );
               },
-              icon: googleAccountIcon,
+              hasIcon: googleAccountIcon,
             ),
             const SizedBox(height: 18),
             VisimoMainButton(
@@ -60,7 +60,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 );
               },
-              icon: appleAccountIcon,
+              hasIcon: appleAccountIcon,
             ),
             const SizedBox(height: 32),
             const DividerWithText(),
@@ -75,7 +75,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 );
               },
-              icon: phoneIcon,
+              hasIcon: phoneIcon,
             ),
             const SizedBox(height: 24),
             const SwitchBetweenSignInSignUp(

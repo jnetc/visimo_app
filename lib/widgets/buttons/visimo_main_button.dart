@@ -7,14 +7,16 @@ class VisimoMainButton extends StatefulWidget {
     super.key,
     required this.buttonName,
     required this.handler,
-    this.icon,
+    this.hasIcon,
     this.color,
+    this.isDisabled = false,
   });
 
   final String buttonName;
   final Color? color;
-  final SvgPicture? icon;
+  final SvgPicture? hasIcon;
   final VoidCallback handler;
+  final bool isDisabled;
 
   @override
   State<VisimoMainButton> createState() => _VisimoMainButtonState();
@@ -30,19 +32,30 @@ class _VisimoMainButtonState extends State<VisimoMainButton> {
       transform += shifted;
       offset -= shifted;
     });
-  }
 
-  void onReleaseButton() {
-    setState(() {
-      transform -= shifted;
-      offset += shifted;
-    });
+    Future.delayed(
+      const Duration(milliseconds: 300),
+      () => setState(() {
+        transform = 0;
+        offset = 5;
+      }),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final defaultBtnColor =
         Theme.of(context).buttonTheme.colorScheme!.background;
+
+    Color textColor = VisimoColors.black;
+
+    if (widget.isDisabled) {
+      textColor = VisimoColors.grey500;
+    }
+
+    if (widget.hasIcon != null) {
+      textColor = VisimoColors.grey800;
+    }
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 100),
@@ -54,28 +67,29 @@ class _VisimoMainButtonState extends State<VisimoMainButton> {
         border: Border.all(
           width: 2,
           style: BorderStyle.solid,
-          color: VisimoColors.black,
+          color: widget.isDisabled ? VisimoColors.grey500 : VisimoColors.black,
         ),
         color: widget.color ?? defaultBtnColor,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(offset, offset),
-            color: VisimoColors.black,
-          ),
-        ],
+        boxShadow: widget.isDisabled
+            ? null
+            : [
+                BoxShadow(
+                  offset: Offset(offset, offset),
+                  color: VisimoColors.black,
+                ),
+              ],
       ),
       child: Material(
         color: VisimoColors.transparent,
         child: InkWell(
-          onTap: widget.handler,
-          onTapDown: (details) => onPressButton(),
-          onTapUp: (details) => onReleaseButton(),
+          onTap: widget.isDisabled ? null : widget.handler,
+          onTapDown: widget.isDisabled ? null : (details) => onPressButton(),
           splashColor: widget.color != null
               ? Theme.of(context).scaffoldBackgroundColor.withOpacity(.2)
               : Theme.of(context).scaffoldBackgroundColor.withOpacity(.6),
           splashFactory: InkRipple.splashFactory,
-          borderRadius: widget.icon != null
+          borderRadius: widget.hasIcon != null
               ? BorderRadius.circular(8)
               : BorderRadius.circular(12),
           child: Padding(
@@ -84,15 +98,13 @@ class _VisimoMainButtonState extends State<VisimoMainButton> {
             child: Stack(
               alignment: Alignment.centerLeft,
               children: [
-                if (widget.icon != null) widget.icon!,
+                if (widget.hasIcon != null) widget.hasIcon!,
                 Center(
                   child: Text(
                     widget.buttonName,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: widget.icon != null
-                          ? VisimoColors.grey800
-                          : VisimoColors.black,
+                      color: textColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),

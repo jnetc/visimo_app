@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:flutter_visimo/screens/create-account/select-image/widgets/cusmomize_tile.dart';
 import 'package:flutter_visimo/screens/create-account/select-island/select_island_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
@@ -11,11 +14,8 @@ class SelectImageScreen extends StatefulWidget {
 }
 
 class _SelectImageScreenState extends State<SelectImageScreen> {
-  final _imahgeController = TextEditingController();
-
   @override
   void dispose() {
-    _imahgeController.dispose();
     super.dispose();
   }
 
@@ -27,29 +27,48 @@ class _SelectImageScreenState extends State<SelectImageScreen> {
         padding:
             const EdgeInsets.only(top: 16, right: 16, bottom: 32, left: 16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const HeadlineLarge(text: 'Set or upload\nprofile image'),
-            const SizedBox(height: 48),
-            TextFormField(
-              controller: _imahgeController,
-              cursorColor: Colors.black,
-              enableSuggestions: false,
-              autocorrect: false,
-              enableIMEPersonalizedLearning: false,
-              maxLength: 45,
-              spellCheckConfiguration: const SpellCheckConfiguration.disabled(),
-              keyboardAppearance: Brightness.dark,
-              decoration:
-                  const InputDecoration().copyWith(hintText: 'Your username'),
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: Colors.black,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const HeadlineLarge(text: 'Let’s start to\ncreate Visik'),
+                  Expanded(
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: SvgPicture.asset(
+                            'assets/visic/visic-base.svg',
+                            width: MediaQuery.of(context).size.width / 2,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
+                  GridView.builder(
+                    itemCount: 8,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      // mainAxisExtent: 64,
+                    ),
+                    itemBuilder: (context, index) => const CustomizeTile(),
+                    shrinkWrap: true,
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 48),
-            const Spacer(),
+            const SizedBox(height: 32),
             VisimoMainButton(
               buttonName: 'Continue',
+              isDisabled: true,
               handler: () {
                 Navigator.push(
                   context,

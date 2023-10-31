@@ -30,3 +30,13 @@ final phoneIcon = SvgPicture.asset(
     BlendMode.srcIn,
   ),
 );
+Widget imagePickerIcon({double height = 24, double width = 24}) =>
+    SvgPicture.asset(
+      'assets/icons/image-picker.svg',
+      height: height,
+      width: width,
+      colorFilter: const ColorFilter.mode(
+        VisimoColors.black,
+        BlendMode.srcIn,
+      ),
+    );

@@ -45,5 +45,12 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- ViSIMO SETTINGS -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Choose photo from your gallery</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Take a photo from your camera</string>
+	<!-- <key>NSMicrophoneUsageDescription</key>
+	<string>Для микрофона пока не надо</string> -->
 </dict>
 </plist>

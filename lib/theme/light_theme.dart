@@ -45,6 +45,7 @@ final lightTheme = ThemeData(
       error: VisimoColors.lightRed,
     ),
   ),
+
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: VisimoColors.lightSurface,
@@ -60,6 +61,10 @@ final lightTheme = ThemeData(
         color: VisimoColors.lightRedAlt,
       ),
     ),
+    errorStyle: const TextStyle(
+      color: VisimoColors.lightRedAlt,
+      fontWeight: FontWeight.bold,
+    ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: const BorderSide(
@@ -71,6 +76,7 @@ final lightTheme = ThemeData(
       fontSize: 16,
     ),
   ),
+
   textTheme: const TextTheme(
     bodySmall: TextStyle(
       color: VisimoColors.grey800,
