@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // COMPONENTS
 import 'package:flutter_visimo/icons/icons.dart';
-import 'package:flutter_visimo/screens/create-account/username/username_screen.dart';
+import 'package:flutter_visimo/screens/create-account/01-username/username_screen.dart';
 import 'package:flutter_visimo/screens/phone-verifications/phone_number_screen.dart';
 import 'package:flutter_visimo/screens/sign-in/signin_screen.dart';
 import 'package:flutter_visimo/screens/sign-up/widgets/terms_and_policy.dart';

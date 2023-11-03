@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_visimo/icons/icons.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:flutter_visimo/screens/create-account/select-island/select_island_screen.dart';
+import 'package:flutter_visimo/screens/create-account/08-select-island/select_island_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
 

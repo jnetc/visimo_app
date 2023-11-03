@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
 
 class SelectIslandScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class SelectIslandScreen extends StatelessWidget {
       body: const SingleChildScrollView(
         child: Column(children: [
           HeadlineLarge(text: 'Select your\npreferred island'),
-          SizedBox(height: 48),
+          SizedBox(height: size48),
         ]),
       ),
     );

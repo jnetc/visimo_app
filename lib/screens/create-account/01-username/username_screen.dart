@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_visimo/screens/create-account/select-image/select_image_screen.dart';
+import 'package:flutter_visimo/assets/constants.dart';
+
+import 'package:flutter_visimo/screens/create-account/02-fullname/fullname_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
 
@@ -11,29 +13,19 @@ class UsernameScreen extends StatefulWidget {
 }
 
 class _UsernameScreenState extends State<UsernameScreen> {
-  final _usernameController = TextEditingController();
   bool focusValue = false;
   bool isTextFieldInValid = true;
   String? errorMessage;
 
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    super.dispose();
-  }
-
   void onTypeUsername(String value) {
     if (value.length < 4 || value.isEmpty) {
-      setState(() {
-        isTextFieldInValid = true;
-      });
+      setState(() => isTextFieldInValid = true);
+
       errorMessage = 'Username is empty or less 4 letters';
       return;
     }
 
-    setState(() {
-      isTextFieldInValid = false;
-    });
+    setState(() => isTextFieldInValid = false);
   }
 
   @override
@@ -41,13 +33,17 @@ class _UsernameScreenState extends State<UsernameScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding:
-            const EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 32),
+        padding: const EdgeInsets.only(
+          top: size16,
+          right: size16,
+          left: size16,
+          bottom: size32,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const HeadlineLarge(text: 'What\'s your\nusername'),
-            const SizedBox(height: 48),
+            const SizedBox(height: size48),
             Focus(
               onFocusChange: (value) {
                 setState(() {
@@ -60,34 +56,33 @@ class _UsernameScreenState extends State<UsernameScreen> {
                 maxLength: 30,
                 keyboardAppearance: Brightness.dark,
                 decoration: const InputDecoration().copyWith(
-                    hintText: 'Your username',
+                    hintText: 'Small Bee',
                     errorText: isTextFieldInValid ? errorMessage : null),
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: Colors.black,
                     ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: size16),
             Text(
               'Your name is used in your profile and will be visible to the Visimo chats and global map.',
               style: Theme.of(context).textTheme.bodySmall,
             ),
+            const Spacer(),
+            VisimoMainButton(
+              buttonName: 'Continue',
+              isDisabled: isTextFieldInValid,
+              color: Theme.of(context).buttonTheme.colorScheme!.primary,
+              handler: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FullNameScreen(),
+                  ),
+                );
+              },
+            ),
           ],
-        ),
-      ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.only(right: 16, bottom: 32, left: 16),
-        child: VisimoMainButton(
-          buttonName: 'Continue',
-          isDisabled: false, //isTextFieldInValid,
-          handler: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SelectImageScreen(),
-              ),
-            );
-          },
         ),
       ),
     );

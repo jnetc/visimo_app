@@ -47,10 +47,12 @@ class _VisimoMainButtonState extends State<VisimoMainButton> {
     final defaultBtnColor =
         Theme.of(context).buttonTheme.colorScheme!.background;
 
+    Color color = widget.color ?? defaultBtnColor;
     Color textColor = VisimoColors.black;
 
     if (widget.isDisabled) {
       textColor = VisimoColors.grey500;
+      color = defaultBtnColor;
     }
 
     if (widget.hasIcon != null) {
@@ -69,7 +71,7 @@ class _VisimoMainButtonState extends State<VisimoMainButton> {
           style: BorderStyle.solid,
           color: widget.isDisabled ? VisimoColors.grey500 : VisimoColors.black,
         ),
-        color: widget.color ?? defaultBtnColor,
+        color: color,
         borderRadius: BorderRadius.circular(12),
         boxShadow: widget.isDisabled
             ? null

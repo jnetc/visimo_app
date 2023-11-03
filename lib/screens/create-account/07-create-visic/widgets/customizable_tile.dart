@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomizeTile extends StatelessWidget {
-  const CustomizeTile({super.key});
+class CustomizableTile extends StatelessWidget {
+  const CustomizableTile({super.key});
 
   @override
   Widget build(BuildContext context) {
