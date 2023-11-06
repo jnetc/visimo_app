@@ -44,5 +44,7 @@ Future<List<Placemark>> getCurrentLocation() async {
   final placemarks =
       await placemarkFromCoordinates(result.latitude, result.longitude);
 
+  print(result);
+  print(placemarks);
   return placemarks;
 }

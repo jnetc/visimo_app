@@ -44,12 +44,12 @@ class _VisimoState extends State<Visimo> {
       // home: Test(
       //   key: UniqueKey(),
       // ),
-      home: const AddLocationScreen(),
-      // home: const StartScreen(
-      //     // toggle: toggle,
-      //     // UniqueKey(), Need to prevent error: "A GlobalKey was used multiple times inside one widget's child list"
-      //     // key: UniqueKey(),
-      //     ),
+      // home: const AddLocationScreen(),
+      home: const StartScreen(
+          // toggle: toggle,
+          // UniqueKey(), Need to prevent error: "A GlobalKey was used multiple times inside one widget's child list"
+          // key: UniqueKey(),
+          ),
     );
   }
 }

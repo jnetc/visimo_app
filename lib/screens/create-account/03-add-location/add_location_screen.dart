@@ -91,7 +91,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
             ),
             const Spacer(),
             Text(
-              'You can do this anytime in your profile section.',
+              'You can skip this step and do this anytime in your profile section.',
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: size16),
