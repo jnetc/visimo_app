@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_visimo/assets/constants.dart';
+import 'package:flutter_visimo/models/user.dart';
+import 'package:flutter_visimo/providers/user_provider.dart';
 
 import 'package:flutter_visimo/screens/create-account/02-fullname/fullname_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
+import 'package:provider/provider.dart';
 
 class UsernameScreen extends StatefulWidget {
   const UsernameScreen({super.key});
@@ -16,20 +19,23 @@ class _UsernameScreenState extends State<UsernameScreen> {
   bool focusValue = false;
   bool isTextFieldInValid = true;
   String? errorMessage;
+  String usernameValue = '';
 
   void onTypeUsername(String value) {
     if (value.length < 4 || value.isEmpty) {
       setState(() => isTextFieldInValid = true);
 
       errorMessage = 'Username is empty or less 4 letters';
-      return;
     }
 
     setState(() => isTextFieldInValid = false);
+    usernameValue = value;
   }
 
   @override
   Widget build(BuildContext context) {
+    final read = context.watch<UserProvider>();
+
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -74,6 +80,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
               isDisabled: isTextFieldInValid,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
               handler: () {
+                read.updateUser(User(username: usernameValue));
                 Navigator.push(
                   context,
                   MaterialPageRoute(

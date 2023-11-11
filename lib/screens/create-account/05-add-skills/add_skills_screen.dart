@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_visimo/assets/constants.dart';
+import 'package:flutter_visimo/models/user.dart';
+import 'package:provider/provider.dart';
 
+import 'package:flutter_visimo/assets/constants.dart';
+import 'package:flutter_visimo/providers/user_provider.dart';
 import 'package:flutter_visimo/screens/create-account/06-links-portfolio/links_portfolio_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
@@ -24,6 +27,7 @@ class _AddSkillsScreenState extends State<AddSkillsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final read = context.read<UserProvider>();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -69,6 +73,7 @@ class _AddSkillsScreenState extends State<AddSkillsScreen> {
               isDisabled: false,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
               handler: () {
+                read.updateUser(User(skills: _addSkillsController.text));
                 Navigator.push(
                   context,
                   MaterialPageRoute(

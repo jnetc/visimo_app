@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/icons/icons.dart';
+import 'package:flutter_visimo/models/user.dart';
+import 'package:flutter_visimo/providers/user_provider.dart';
 import 'package:flutter_visimo/screens/create-account/03-add-location/helpers/get_location.dart';
 import 'package:flutter_visimo/screens/create-account/04-add-description/add_description_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
@@ -18,6 +21,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
   final _addLocationController = TextEditingController();
   bool focusValue = false;
   String indicate = 'Find location';
+  CurrentGeoLocation location = CurrentGeoLocation();
 
   @override
   void dispose() {
@@ -29,6 +33,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
     setState(() => indicate = 'Getting location');
 
     try {
+      final position = await determinePosition();
       final placemarks = await getCurrentLocation();
 
       if (placemarks.isEmpty) {
@@ -36,9 +41,10 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
         return;
       }
 
-      // print(placemarks.first);
       setState(() {
         indicate = 'Find location';
+        location.latitude = position.latitude;
+        location.longitude = position.longitude;
         _addLocationController.text =
             '${placemarks.first.locality}, ${placemarks.first.country}';
       });
@@ -51,6 +57,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final read = context.watch<UserProvider>();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -100,6 +107,18 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
               isDisabled: false,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
               handler: () {
+                read.updateUser(
+                  User(
+                    currentPos: CurrentGeoLocation(
+                      latitude: location.latitude,
+                      longitude: location.longitude,
+                      address: _addLocationController.text.isNotEmpty
+                          ? _addLocationController.text
+                          : null,
+                    ),
+                  ),
+                );
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(

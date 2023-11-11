@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_visimo/assets/constants.dart';
+import 'package:flutter_visimo/models/user.dart';
+import 'package:flutter_visimo/providers/user_provider.dart';
 import 'package:flutter_visimo/screens/create-account/05-add-skills/add_skills_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
+import 'package:provider/provider.dart';
 
 class AddDescriptionScreen extends StatefulWidget {
   const AddDescriptionScreen({super.key});
@@ -28,6 +31,7 @@ class _AddDescriptionScreenState extends State<AddDescriptionScreen> {
     final safeHeight = MediaQuery.of(context).padding.top;
     final appBarHeight = AppBar().preferredSize.height;
     final screenViewHeight = maxHeight - (appBarHeight + safeHeight);
+    final read = context.read<UserProvider>();
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,
@@ -78,6 +82,8 @@ class _AddDescriptionScreenState extends State<AddDescriptionScreen> {
                     isDisabled: false,
                     color: Theme.of(context).buttonTheme.colorScheme!.primary,
                     handler: () {
+                      read.updateUser(
+                          User(description: _addDescriptionController.text));
                       Navigator.push(
                         context,
                         MaterialPageRoute(

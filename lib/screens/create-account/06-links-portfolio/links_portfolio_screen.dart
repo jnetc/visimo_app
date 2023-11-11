@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_visimo/assets/constants.dart';
+// import 'package:provider/provider.dart';
 
+import 'package:flutter_visimo/assets/constants.dart';
+// import 'package:flutter_visimo/providers/user_provider.dart';
 import 'package:flutter_visimo/screens/create-account/07-create-visic/create_visic_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
@@ -24,6 +26,7 @@ class _LinksPortfolioScreenState extends State<LinksPortfolioScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // final read = context.read<UserProvider>();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(

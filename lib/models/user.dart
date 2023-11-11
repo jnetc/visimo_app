@@ -5,43 +5,44 @@ import 'package:uuid/v4.dart';
 const uuid = UuidV4();
 
 class User {
-  User(
+  User({
+    this.username = '',
     this.fullname,
     this.currentPos,
-    this.localePos,
+    this.localPos,
     this.description,
     this.skills,
     this.visic,
-    this.island, {
-    required this.username,
+    this.island,
     this.portfolioLinks = const [],
   }) : id = uuid.generate();
 
-  final String id;
-  final String username;
-  final String fullname;
-  final CurrentGeoLocation currentPos;
-  final LocalGeoLocation localePos;
-  final String description;
-  final String skills;
-  final List<String> portfolioLinks;
-  final CustomizableVisic visic;
-  final Island island;
+  String id;
+  String username;
+  String? fullname;
+  CurrentGeoLocation? currentPos;
+  LocalGeoLocation? localPos;
+  String? description;
+  String? skills;
+  List<String>? portfolioLinks;
+  CustomizableVisic? visic;
+  Island? island;
 }
 
 abstract class Location {
-  Location({required this.latitude, required this.longitude});
+  Location({this.latitude, this.longitude});
 
-  final double latitude;
-  final double longitude;
+  double? latitude;
+  double? longitude;
 }
 
 class CurrentGeoLocation extends Location {
-  CurrentGeoLocation({required super.latitude, required super.longitude});
+  CurrentGeoLocation({super.latitude, super.longitude, this.address});
+  String? address;
 }
 
 class LocalGeoLocation extends Location {
   LocalGeoLocation(this.address,
       {required super.latitude, required super.longitude});
-  final String address;
+  String address;
 }
