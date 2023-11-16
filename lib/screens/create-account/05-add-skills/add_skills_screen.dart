@@ -29,6 +29,7 @@ class _AddSkillsScreenState extends State<AddSkillsScreen> {
   Widget build(BuildContext context) {
     final read = context.read<UserProvider>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.only(
