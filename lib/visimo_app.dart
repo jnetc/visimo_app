@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // need for orientation
+import 'package:flutter_visimo/screens/create-account/06-links-portfolio/links_portfolio_screen.dart';
 
 import 'package:flutter_visimo/screens/start/start_screen.dart';
 import 'package:flutter_visimo/theme/dark_theme.dart';
@@ -43,12 +44,12 @@ class _VisimoState extends State<Visimo> {
       // home: Test(
       //   key: UniqueKey(),
       // ),
-      // home: const AddLocationScreen(),
-      home: const StartScreen(
-          // toggle: toggle,
-          // UniqueKey(), Need to prevent error: "A GlobalKey was used multiple times inside one widget's child list"
-          // key: UniqueKey(),
-          ),
+      home: const LinksPortfolioScreen(),
+      // home: const StartScreen(
+      //     // toggle: toggle,
+      //     // UniqueKey(), Need to prevent error: "A GlobalKey was used multiple times inside one widget's child list"
+      //     // key: UniqueKey(),
+      //     ),
     );
   }
 }
