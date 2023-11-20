@@ -24,9 +24,6 @@ class _CreateVisicScreenState extends State<CreateVisicScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<UserProvider>().user.portfolioLinks;
-
-    print(watch);
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -86,7 +83,8 @@ class _CreateVisicScreenState extends State<CreateVisicScreen> {
             const SizedBox(height: size32),
             VisimoMainButton(
               buttonName: 'Continue',
-              isDisabled: true,
+              isDisabled: false,
+              color: Theme.of(context).buttonTheme.colorScheme!.primary,
               handler: () {
                 Navigator.push(
                   context,
