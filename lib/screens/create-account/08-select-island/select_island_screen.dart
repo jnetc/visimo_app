@@ -19,11 +19,30 @@ class SelectIslandScreen extends StatefulWidget {
 
 class _SelectIslandScreenState extends State<SelectIslandScreen> {
   final ValueNotifier<int> _valueNotifier = ValueNotifier(1);
-  final int allIslands = islands.length;
+  PageController _pageController = PageController();
+  String selectedIslandName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    // Get User model from Provider
+    final initUser = Provider.of<UserProvider>(context, listen: false).user;
+    // Is island was selected
+    if (initUser.island == null) {
+      return;
+    }
+    // Find index
+    final indexOfIsland = islands.indexOf(initUser.island!);
+    // Set values from Provider
+    _pageController = PageController(initialPage: indexOfIsland);
+    _valueNotifier.value = indexOfIsland + 1;
+    selectedIslandName = islands[indexOfIsland].name.name;
+  }
 
   @override
   void dispose() {
     _valueNotifier.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -51,9 +70,25 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
           const SizedBox(height: size48),
           Expanded(
             child: PageView(
+              controller: _pageController,
+              // physics: const BouncingScrollPhysics(), // Кэширует элементы списка
+              // physics: const ClampingScrollPhysics(), // Не кэширует элементы списка
+              physics: const ClampingScrollPhysics(),
               onPageChanged: (int value) => getPageCount(value++),
               children: islands
-                  .map((Island island) => IslandViewPage(island: island))
+                  .map(
+                    (Island island) => GestureDetector(
+                      onTap: () {
+                        setState(() => selectedIslandName = island.name.name);
+                        read.updateUser(
+                            User(island: islands[_valueNotifier.value - 1]));
+                      },
+                      child: IslandViewPage(
+                        island: island,
+                        isSelected: selectedIslandName == island.name.name,
+                      ),
+                    ),
+                  )
                   .toList(),
             ),
           ),
@@ -62,7 +97,7 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
             child: ValueListenableBuilder(
               valueListenable: _valueNotifier,
               builder: (context, value, _) => Text(
-                '${value.toString()}/$allIslands',
+                '${value.toString()}/${islands.length}', // Counter 1 / 7
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
@@ -76,7 +111,7 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
             ),
             child: VisimoMainButton(
               buttonName: 'Continue',
-              isDisabled: false,
+              isDisabled: selectedIslandName.isEmpty,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
               handler: () {
                 read.updateUser(

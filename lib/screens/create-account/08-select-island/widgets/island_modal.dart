@@ -24,7 +24,7 @@ class IslandModal extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Image.asset(
-            'assets/islands/Island-${island.name.name}.png',
+            'assets/islands/Island-${island.name.name}.webp',
             width: 350,
             height: 350,
             colorBlendMode: BlendMode.multiply,

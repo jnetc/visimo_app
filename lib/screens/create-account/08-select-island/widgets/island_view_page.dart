@@ -11,9 +11,11 @@ class IslandViewPage extends StatelessWidget {
   const IslandViewPage({
     super.key,
     required this.island,
+    this.isSelected = false,
   });
 
   final Island island;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +27,18 @@ class IslandViewPage extends StatelessWidget {
         ),
         const SizedBox(height: size24),
         Expanded(
-          child: Image.asset(
-            'assets/islands/Island-${island.name.name}.png',
-            width: 350,
-            height: 350,
-            colorBlendMode: BlendMode.multiply,
-            color: VisimoColors.lightBackdrop,
-            fit: BoxFit.cover,
+          child: Stack(
+            children: [
+              Image.asset(
+                'assets/islands/Island-${island.name.name}.webp',
+                width: 350,
+                height: 350,
+                colorBlendMode: BlendMode.multiply,
+                color: VisimoColors.lightBackdrop,
+                fit: BoxFit.cover,
+              ),
+              if (isSelected) const Text('Selected'),
+            ],
           ),
         ),
         const SizedBox(height: size24),
@@ -56,15 +63,16 @@ class IslandViewPage extends StatelessWidget {
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       showModalBottomSheet(
-                          backgroundColor: VisimoColors.lightSurface,
-                          elevation: 0,
-                          isScrollControlled: true,
-                          showDragHandle: true,
-                          useSafeArea: true,
-                          context: context,
-                          builder: (context) {
-                            return IslandModal(island: island);
-                          });
+                        backgroundColor: VisimoColors.lightSurface,
+                        elevation: 0,
+                        isScrollControlled: true,
+                        showDragHandle: true,
+                        useSafeArea: true,
+                        context: context,
+                        builder: (context) {
+                          return IslandModal(island: island);
+                        },
+                      );
                     },
                 ),
               ],
