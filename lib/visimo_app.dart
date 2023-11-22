@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // need for orientation
-import 'package:flutter_visimo/screens/create-account/08-select-island/select_island_screen.dart';
 
 import 'package:flutter_visimo/screens/start/start_screen.dart';
 import 'package:flutter_visimo/theme/dark_theme.dart';

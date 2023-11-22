@@ -19,7 +19,7 @@ class AddLocationScreen extends StatefulWidget {
 
 class _AddLocationScreenState extends State<AddLocationScreen> {
   final _addLocationController = TextEditingController();
-  bool focusValue = false;
+  // bool focusValue = false;
   String indicate = 'Find location';
   CurrentGeoLocation location = CurrentGeoLocation();
 
@@ -72,23 +72,16 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
           children: [
             const HeadlineLarge(text: 'Add your current\nlocation'),
             const SizedBox(height: size48),
-            Focus(
-              onFocusChange: (value) {
-                setState(() {
-                  focusValue = value;
-                });
-              },
-              child: TextField(
-                controller: _addLocationController,
-                cursorColor: Colors.black,
-                keyboardAppearance: Brightness.dark,
-                decoration: const InputDecoration().copyWith(
-                  hintText: 'Helsinki, Suomi',
-                ),
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Colors.black,
-                    ),
+            TextField(
+              controller: _addLocationController,
+              cursorColor: Colors.black,
+              keyboardAppearance: Brightness.dark,
+              decoration: const InputDecoration().copyWith(
+                hintText: 'Helsinki, Suomi',
               ),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: Colors.black,
+                  ),
             ),
             const SizedBox(height: size24),
             VisimoMainButton(
@@ -104,7 +97,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
             const SizedBox(height: size16),
             VisimoMainButton(
               buttonName: 'Continue',
-              isDisabled: false,
+              isDisabled: indicate.contains('Getting location') ? true : false,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
               handler: () {
                 read.updateUser(

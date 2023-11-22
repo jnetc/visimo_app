@@ -95,8 +95,6 @@ final lightTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
   ),
-
-  useMaterial3: true,
   // extensions: const <ThemeExtension<dynamic>>[
   //   VisimoStyle.light,
   // ],

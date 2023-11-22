@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/models/island.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
 import 'package:provider/provider.dart';
 
+import 'helper/custom_physics.dart';
 import 'widgets/island_view_page.dart';
 
 class SelectIslandScreen extends StatefulWidget {
@@ -36,7 +38,7 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
     // Set values from Provider
     _pageController = PageController(initialPage: indexOfIsland);
     _valueNotifier.value = indexOfIsland + 1;
-    selectedIslandName = islands[indexOfIsland].name.name;
+    selectedIslandName = islands[indexOfIsland].island.name;
   }
 
   @override
@@ -69,27 +71,31 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
           ),
           const SizedBox(height: size48),
           Expanded(
-            child: PageView(
+            child: PageView.builder(
+              // allowImplicitScrolling: true,
+
               controller: _pageController,
+              itemCount: islands.length,
               // physics: const BouncingScrollPhysics(), // Кэширует элементы списка
               // physics: const ClampingScrollPhysics(), // Не кэширует элементы списка
-              physics: const ClampingScrollPhysics(),
+              physics: const CustomPageViewScrollPhysics(),
               onPageChanged: (int value) => getPageCount(value++),
-              children: islands
-                  .map(
-                    (Island island) => GestureDetector(
-                      onTap: () {
-                        setState(() => selectedIslandName = island.name.name);
-                        read.updateUser(
-                            User(island: islands[_valueNotifier.value - 1]));
-                      },
-                      child: IslandViewPage(
-                        island: island,
-                        isSelected: selectedIslandName == island.name.name,
-                      ),
-                    ),
-                  )
-                  .toList(),
+              itemBuilder: (context, int value) {
+                return GestureDetector(
+                  dragStartBehavior: DragStartBehavior.down,
+                  onTapUp: (details) {
+                    setState(
+                        () => selectedIslandName = islands[value].island.name);
+                    read.updateUser(
+                        User(island: islands[_valueNotifier.value - 1]));
+                  },
+                  child: IslandViewPage(
+                    props: islands[value],
+                    isSelected:
+                        selectedIslandName == islands[value].island.name,
+                  ),
+                );
+              },
             ),
           ),
           const SizedBox(height: size24),

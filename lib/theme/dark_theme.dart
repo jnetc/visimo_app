@@ -22,6 +22,5 @@ final darkTheme = ThemeData(
       errorColor: VisimoColors.darkRed,
     ),
   ),
-  useMaterial3: true,
   // extensions: const <ThemeExtension<dynamic>>[VisimoStyle.dark],
 );

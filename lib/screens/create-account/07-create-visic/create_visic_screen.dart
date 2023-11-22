@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_visimo/assets/constants.dart';
-import 'package:flutter_visimo/providers/user_provider.dart';
 
 import 'package:flutter_visimo/screens/create-account/07-create-visic/widgets/customizable_tile.dart';
 import 'package:flutter_visimo/screens/create-account/08-select-island/select_island_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
-import 'package:provider/provider.dart';
 
 class CreateVisicScreen extends StatefulWidget {
   const CreateVisicScreen({super.key});

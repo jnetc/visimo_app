@@ -1,20 +1,22 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/extensions/capitalize.dart';
 import 'package:flutter_visimo/models/island.dart';
 import 'package:flutter_visimo/theme/colors.dart';
 
 import 'island_modal.dart';
+import 'island_selected.dart';
 
 class IslandViewPage extends StatelessWidget {
   const IslandViewPage({
     super.key,
-    required this.island,
+    required this.props,
     this.isSelected = false,
   });
 
-  final Island island;
+  final Island props;
   final bool isSelected;
 
   @override
@@ -22,22 +24,23 @@ class IslandViewPage extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '${island.name.name.capitalize()} Island',
+          '${props.island.name.toCapitalize()} Island',
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: size24),
         Expanded(
           child: Stack(
+            alignment: Alignment.center,
             children: [
               Image.asset(
-                'assets/islands/Island-${island.name.name}.webp',
-                width: 350,
-                height: 350,
+                'assets/islands/Island-${props.island.name}.webp',
+                // width: 350,
+                // height: 350,
                 colorBlendMode: BlendMode.multiply,
                 color: VisimoColors.lightBackdrop,
                 fit: BoxFit.cover,
               ),
-              if (isSelected) const Text('Selected'),
+              if (isSelected) const IslandSelected(),
             ],
           ),
         ),
@@ -51,7 +54,7 @@ class IslandViewPage extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
               children: [
                 TextSpan(
-                  text: island.description.substring(0, 70),
+                  text: props.description.substring(0, 70),
                 ),
                 const TextSpan(text: '... '),
                 TextSpan(
@@ -70,7 +73,7 @@ class IslandViewPage extends StatelessWidget {
                         useSafeArea: true,
                         context: context,
                         builder: (context) {
-                          return IslandModal(island: island);
+                          return IslandModal(props: props);
                         },
                       );
                     },

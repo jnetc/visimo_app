@@ -6,10 +6,10 @@ import 'package:flutter_visimo/theme/colors.dart';
 class IslandModal extends StatelessWidget {
   const IslandModal({
     super.key,
-    required this.island,
+    required this.props,
   });
 
-  final Island island;
+  final Island props;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class IslandModal extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Image.asset(
-            'assets/islands/Island-${island.name.name}.webp',
+            'assets/islands/Island-${props.island.name}.webp',
             width: 350,
             height: 350,
             colorBlendMode: BlendMode.multiply,
@@ -33,7 +33,7 @@ class IslandModal extends StatelessWidget {
           ),
           const SizedBox(height: size24),
           Text(
-            island.description,
+            props.description,
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
