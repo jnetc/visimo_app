@@ -17,17 +17,30 @@ class LinksPortfolioScreen extends StatefulWidget {
 }
 
 class _LinksPortfolioScreenState extends State<LinksPortfolioScreen> {
-  final _addSkillsController = TextEditingController();
-  var links = ['https://facabook.com', 'https://instagram.com'];
+  final _addLinkController = TextEditingController();
+  List<String> links = ['https://facabook.com', 'https://instagram.com'];
   String errorMessage = '';
 
   @override
+  void initState() {
+    final initLinks =
+        Provider.of<UserProvider>(context, listen: false).user.portfolioLinks;
+
+    if (initLinks!.isEmpty) {
+      return;
+    }
+
+    links = initLinks;
+    super.initState();
+  }
+
+  @override
   void dispose() {
-    _addSkillsController.dispose();
+    _addLinkController.dispose();
     super.dispose();
   }
 
-  void onAddPortfolioLink(String link) {
+  void _addPortfolioLink(String link) {
     if (link.isEmpty) {
       errorMessage = 'Input is empty';
       return;
@@ -44,27 +57,32 @@ class _LinksPortfolioScreenState extends State<LinksPortfolioScreen> {
     }
     errorMessage = '';
     links.insert(0, link);
-    _addSkillsController.clear();
+    _addLinkController.clear();
   }
 
-  void removePortfolioLink(int index) {
+  void _removePortfolioLink(int index) {
     links.removeAt(index);
     setState(() {});
   }
 
+  void _setPortfolioLinks(BuildContext context) {
+    final read = Provider.of<UserProvider>(context, listen: false).user;
+
+    read.portfolioLinks = links.toList();
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CreateVisicScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final read = context.read<UserProvider>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(surfaceTintColor: Colors.transparent),
       body: Padding(
-        padding: const EdgeInsets.only(
-          top: size16,
-          right: size16,
-          left: size16,
-          bottom: size32,
-        ),
+        padding: bodyPadding,
         child: Column(
           children: [
             Column(
@@ -74,7 +92,7 @@ class _LinksPortfolioScreenState extends State<LinksPortfolioScreen> {
                 const HeadlineLarge(text: 'Add links to your\nportfolios'),
                 const SizedBox(height: size48),
                 LinkInput(
-                  controller: _addSkillsController,
+                  controller: _addLinkController,
                   errorMessage: errorMessage,
                 ),
                 const SizedBox(height: size18),
@@ -82,7 +100,7 @@ class _LinksPortfolioScreenState extends State<LinksPortfolioScreen> {
                   buttonName: 'Add link',
                   handler: () {
                     setState(() {
-                      onAddPortfolioLink(_addSkillsController.text);
+                      _addPortfolioLink(_addLinkController.text);
                     });
                   },
                 ),
@@ -99,7 +117,7 @@ class _LinksPortfolioScreenState extends State<LinksPortfolioScreen> {
                     return LinkTile(
                       index: index,
                       title: links[index],
-                      onDeleteFromLink: () => removePortfolioLink(index),
+                      onDeleteFromLink: () => _removePortfolioLink(index),
                     );
                   },
                 ),
@@ -117,15 +135,7 @@ class _LinksPortfolioScreenState extends State<LinksPortfolioScreen> {
                   buttonName: 'Continue',
                   isDisabled: false,
                   color: Theme.of(context).buttonTheme.colorScheme!.primary,
-                  handler: () {
-                    read.user.portfolioLinks = links.toList();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CreateVisicScreen(),
-                      ),
-                    );
-                  },
+                  handler: () => _setPortfolioLinks(context),
                 ),
               ],
             ),

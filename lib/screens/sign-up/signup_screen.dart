@@ -15,6 +15,20 @@ class SignUpScreen extends StatelessWidget {
     super.key,
   });
 
+  void _signUpWithAccounts(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const UsernameScreen()),
+    );
+  }
+
+  void _signUpWithPhone(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const PhoneNumberScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // To make a flexible gap between the last and previous element in the SingleChildScrollView and Spacer
@@ -39,27 +53,13 @@ class SignUpScreen extends StatelessWidget {
             const SizedBox(height: 48),
             VisimoMainButton(
               buttonName: 'Continue with Google',
-              handler: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const UsernameScreen(),
-                  ),
-                );
-              },
+              handler: () => _signUpWithAccounts(context),
               hasIcon: googleAccountIcon,
             ),
             const SizedBox(height: 18),
             VisimoMainButton(
               buttonName: 'Continue with Apple',
-              handler: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const UsernameScreen(),
-                  ),
-                );
-              },
+              handler: () => _signUpWithAccounts(context),
               hasIcon: appleAccountIcon,
             ),
             const SizedBox(height: 32),
@@ -67,14 +67,7 @@ class SignUpScreen extends StatelessWidget {
             const SizedBox(height: 32),
             VisimoMainButton(
               buttonName: 'Phone number',
-              handler: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PhoneNumberScreen(),
-                  ),
-                );
-              },
+              handler: () => _signUpWithPhone(context),
               hasIcon: phoneIcon,
             ),
             const SizedBox(height: 24),

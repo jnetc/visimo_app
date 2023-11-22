@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_visimo/models/user.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_visimo/models/user.dart';
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/providers/user_provider.dart';
 import 'package:flutter_visimo/screens/create-account/06-links-portfolio/links_portfolio_screen.dart';
@@ -16,28 +16,47 @@ class AddSkillsScreen extends StatefulWidget {
 }
 
 class _AddSkillsScreenState extends State<AddSkillsScreen> {
-  final _addSkillsController = TextEditingController();
+  final _controller = TextEditingController();
   bool focusValue = false;
 
   @override
+  void initState() {
+    final initSkills =
+        Provider.of<UserProvider>(context, listen: false).user.skills;
+
+    if (initSkills == null) {
+      return;
+    }
+
+    _controller.text = initSkills;
+    super.initState();
+  }
+
+  @override
   void dispose() {
-    _addSkillsController.dispose();
+    _controller.dispose();
     super.dispose();
+  }
+
+  void _setSkills(BuildContext context) {
+    final read = Provider.of<UserProvider>(context, listen: false);
+    final skills = _controller.text.isEmpty ? null : _controller.text;
+
+    read.updateUserSkills(User(skills: skills));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LinksPortfolioScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<UserProvider>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.only(
-          top: size16,
-          right: size16,
-          left: size16,
-          bottom: size32,
-        ),
+        padding: bodyPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -50,14 +69,13 @@ class _AddSkillsScreenState extends State<AddSkillsScreen> {
                 });
               },
               child: TextField(
-                controller: _addSkillsController,
+                controller: _controller,
                 minLines: 5,
                 maxLines: 10,
-                // onChanged: (value) => onTypeUsername(value),
                 cursorColor: Colors.black,
                 keyboardAppearance: Brightness.dark,
                 decoration: const InputDecoration()
-                    .copyWith(hintText: 'Helsinki, Suomi'),
+                    .copyWith(hintText: 'Type your skills here'),
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: Colors.black,
                     ),
@@ -73,15 +91,7 @@ class _AddSkillsScreenState extends State<AddSkillsScreen> {
               buttonName: 'Continue',
               isDisabled: false,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
-              handler: () {
-                read.updateUser(User(skills: _addSkillsController.text));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LinksPortfolioScreen(),
-                  ),
-                );
-              },
+              handler: () => _setSkills(context),
             ),
           ],
         ),

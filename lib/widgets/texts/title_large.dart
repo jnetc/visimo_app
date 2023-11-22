@@ -10,7 +10,7 @@ class HeadlineLarge extends StatelessWidget {
     return Text(
       text,
       style: Theme.of(context).textTheme.headlineLarge,
-      maxLines: 2,
+      maxLines: 3,
       overflow: TextOverflow.ellipsis,
       softWrap: true,
     );

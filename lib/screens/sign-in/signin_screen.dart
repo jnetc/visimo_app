@@ -12,6 +12,20 @@ import 'package:flutter_visimo/widgets/texts/title_large.dart';
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
+  void _signInWithAccounts(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const UsernameScreen()),
+    );
+  }
+
+  void _signInWithPhone(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const PhoneNumberScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,27 +43,13 @@ class SignInScreen extends StatelessWidget {
             const SizedBox(height: 48),
             VisimoMainButton(
               buttonName: 'Continue with Google',
-              handler: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const UsernameScreen(),
-                  ),
-                );
-              },
+              handler: () => _signInWithAccounts(context),
               hasIcon: googleAccountIcon,
             ),
             const SizedBox(height: 18),
             VisimoMainButton(
               buttonName: 'Continue with Apple',
-              handler: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const UsernameScreen(),
-                  ),
-                );
-              },
+              handler: () => _signInWithAccounts(context),
               hasIcon: appleAccountIcon,
             ),
             const SizedBox(height: 32),
@@ -57,14 +57,7 @@ class SignInScreen extends StatelessWidget {
             const SizedBox(height: 32),
             VisimoMainButton(
               buttonName: 'Phone number',
-              handler: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PhoneNumberScreen(),
-                  ),
-                );
-              },
+              handler: () => _signInWithPhone(context),
               hasIcon: phoneIcon,
             ),
             const SizedBox(height: 24),

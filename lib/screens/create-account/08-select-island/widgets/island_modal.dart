@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/models/island.dart';
 import 'package:flutter_visimo/theme/colors.dart';
@@ -14,12 +15,7 @@ class IslandModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(
-        top: size16,
-        right: size16,
-        left: size16,
-        bottom: size32,
-      ),
+      padding: bodyPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

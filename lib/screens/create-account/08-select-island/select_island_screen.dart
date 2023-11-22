@@ -1,5 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/gestures.dart';
+
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/models/island.dart';
 import 'package:flutter_visimo/models/user.dart';
@@ -7,7 +9,6 @@ import 'package:flutter_visimo/providers/user_provider.dart';
 import 'package:flutter_visimo/screens/create-account/09-account-created/account_created_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
-import 'package:provider/provider.dart';
 
 import 'helper/custom_physics.dart';
 import 'widgets/island_view_page.dart';
@@ -48,18 +49,37 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
     super.dispose();
   }
 
-  void getPageCount(int page) {
+  void _getPageCount(int page) {
     _valueNotifier.value = page + 1;
+  }
+
+  void _selectIsland(BuildContext context, int value) {
+    final read = Provider.of<UserProvider>(context, listen: false);
+
+    setState(() => selectedIslandName = islands[value].island.name);
+    read.updateUserIsland(User(island: islands[_valueNotifier.value - 1]));
+  }
+
+  void _setIsland(BuildContext context) {
+    final read = Provider.of<UserProvider>(context, listen: false);
+
+    read.updateUserIsland(User(island: islands[_valueNotifier.value - 1]));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AccountCreatedScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<UserProvider>();
+    // final watch = context.watch<UserProvider>().user.description;
+    // print(watch);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Padding(
             padding: EdgeInsets.only(
@@ -79,16 +99,11 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
               // physics: const BouncingScrollPhysics(), // Кэширует элементы списка
               // physics: const ClampingScrollPhysics(), // Не кэширует элементы списка
               physics: const CustomPageViewScrollPhysics(),
-              onPageChanged: (int value) => getPageCount(value++),
+              onPageChanged: (int value) => _getPageCount(value++),
               itemBuilder: (context, int value) {
                 return GestureDetector(
                   dragStartBehavior: DragStartBehavior.down,
-                  onTapUp: (details) {
-                    setState(
-                        () => selectedIslandName = islands[value].island.name);
-                    read.updateUser(
-                        User(island: islands[_valueNotifier.value - 1]));
-                  },
+                  onTapUp: (details) => _selectIsland(context, value),
                   child: IslandViewPage(
                     props: islands[value],
                     isSelected:
@@ -119,16 +134,7 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
               buttonName: 'Continue',
               isDisabled: selectedIslandName.isEmpty,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
-              handler: () {
-                read.updateUser(
-                    User(island: islands[_valueNotifier.value - 1]));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AccountCreatedScreen(),
-                  ),
-                );
-              },
+              handler: () => _setIsland(context),
             ),
           ),
         ],

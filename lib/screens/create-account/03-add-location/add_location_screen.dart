@@ -18,18 +18,32 @@ class AddLocationScreen extends StatefulWidget {
 }
 
 class _AddLocationScreenState extends State<AddLocationScreen> {
-  final _addLocationController = TextEditingController();
+  final _controller = TextEditingController();
   // bool focusValue = false;
   String indicate = 'Find location';
   CurrentGeoLocation location = CurrentGeoLocation();
 
   @override
+  void initState() {
+    final initLocation =
+        Provider.of<UserProvider>(context, listen: false).user.currentPos;
+
+    if (initLocation == null) {
+      return;
+    }
+
+    _controller.text = initLocation.address!;
+    location = initLocation;
+    super.initState();
+  }
+
+  @override
   void dispose() {
-    _addLocationController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
-  _getSity() async {
+  void _getSity() async {
     setState(() => indicate = 'Getting location');
 
     try {
@@ -45,7 +59,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
         indicate = 'Find location';
         location.latitude = position.latitude;
         location.longitude = position.longitude;
-        _addLocationController.text =
+        _controller.text =
             '${placemarks.first.locality}, ${placemarks.first.country}';
       });
     } catch (err) {
@@ -55,25 +69,39 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
     }
   }
 
+  void _setLocation(BuildContext context) {
+    final read = Provider.of<UserProvider>(context, listen: false);
+    final address = _controller.text.isEmpty ? null : _controller.text;
+
+    read.updateUserCurrentPos(
+      User(
+        currentPos: CurrentGeoLocation(
+          latitude: location.latitude,
+          longitude: location.longitude,
+          address: address,
+        ),
+      ),
+    );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AddDescriptionScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final read = context.watch<UserProvider>();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.only(
-          top: size16,
-          right: size16,
-          left: size16,
-          bottom: size32,
-        ),
+        padding: bodyPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const HeadlineLarge(text: 'Add your current\nlocation'),
             const SizedBox(height: size48),
             TextField(
-              controller: _addLocationController,
+              controller: _controller,
               cursorColor: Colors.black,
               keyboardAppearance: Brightness.dark,
               decoration: const InputDecoration().copyWith(
@@ -99,26 +127,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
               buttonName: 'Continue',
               isDisabled: indicate.contains('Getting location') ? true : false,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
-              handler: () {
-                read.updateUser(
-                  User(
-                    currentPos: CurrentGeoLocation(
-                      latitude: location.latitude,
-                      longitude: location.longitude,
-                      address: _addLocationController.text.isNotEmpty
-                          ? _addLocationController.text
-                          : null,
-                    ),
-                  ),
-                );
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AddDescriptionScreen(),
-                  ),
-                );
-              },
+              handler: () => _setLocation(context),
             ),
           ],
         ),

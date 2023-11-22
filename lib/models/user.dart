@@ -9,7 +9,6 @@ class User {
     this.username = '',
     this.fullname,
     this.currentPos,
-    this.localPos,
     this.description,
     this.skills,
     this.visic,
@@ -21,7 +20,6 @@ class User {
   String username;
   String? fullname;
   CurrentGeoLocation? currentPos;
-  LocalGeoLocation? localPos;
   String? description;
   String? skills;
   List<String>? portfolioLinks;
@@ -41,8 +39,8 @@ class CurrentGeoLocation extends Location {
   String? address;
 }
 
-class LocalGeoLocation extends Location {
-  LocalGeoLocation(this.address,
-      {required super.latitude, required super.longitude});
-  String address;
-}
+// class LocalGeoLocation extends Location {
+//   LocalGeoLocation(this.address,
+//       {required super.latitude, required super.longitude});
+//   String address;
+// }

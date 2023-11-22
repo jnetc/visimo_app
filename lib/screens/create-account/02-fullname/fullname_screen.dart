@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:flutter_visimo/providers/user_provider.dart';
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/models/user.dart';
-import 'package:flutter_visimo/providers/user_provider.dart';
-
 import 'package:flutter_visimo/screens/create-account/03-add-location/add_location_screen.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
-import 'package:provider/provider.dart';
 
 class FullNameScreen extends StatefulWidget {
   const FullNameScreen({super.key});
@@ -16,27 +16,48 @@ class FullNameScreen extends StatefulWidget {
 }
 
 class _FullNameScreenState extends State<FullNameScreen> {
-  final _fullNameController = TextEditingController();
+  final _controller = TextEditingController();
   bool focusValue = false;
 
   @override
+  void initState() {
+    final initFullname =
+        Provider.of<UserProvider>(context, listen: false).user.fullname;
+
+    if (initFullname == null) {
+      return;
+    }
+
+    _controller.text = initFullname;
+    super.initState();
+  }
+
+  @override
   void dispose() {
-    _fullNameController.dispose();
+    _controller.dispose();
     super.dispose();
+  }
+
+  void _setFullName(BuildContext context) {
+    final read = Provider.of<UserProvider>(context, listen: false);
+    final fullname = _controller.text.isEmpty ? null : _controller.text;
+
+    read.updateUserFullName(User(fullname: fullname));
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AddLocationScreen(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final read = context.watch<UserProvider>();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.only(
-          top: size16,
-          right: size16,
-          left: size16,
-          bottom: size32,
-        ),
+        padding: bodyPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -48,15 +69,22 @@ class _FullNameScreenState extends State<FullNameScreen> {
                   focusValue = value;
                 });
               },
-              child: TextField(
-                controller: _fullNameController,
-                cursorColor: Colors.black,
-                keyboardAppearance: Brightness.dark,
-                decoration: const InputDecoration()
-                    .copyWith(hintText: 'Pekka Viroliainen'),
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Colors.black,
-                    ),
+              child: Focus(
+                onFocusChange: (value) {
+                  setState(() {
+                    focusValue = value;
+                  });
+                },
+                child: TextField(
+                  controller: _controller,
+                  cursorColor: Colors.black,
+                  keyboardAppearance: Brightness.dark,
+                  decoration: const InputDecoration()
+                      .copyWith(hintText: 'Pekka Viroliainen'),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Colors.black,
+                      ),
+                ),
               ),
             ),
             const Spacer(),
@@ -69,15 +97,7 @@ class _FullNameScreenState extends State<FullNameScreen> {
               buttonName: 'Continue',
               isDisabled: false,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
-              handler: () {
-                read.updateUser(User(fullname: _fullNameController.text));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AddLocationScreen(),
-                  ),
-                );
-              },
+              handler: () => _setFullName(context),
             ),
           ],
         ),
