@@ -53,17 +53,22 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
     _valueNotifier.value = page + 1;
   }
 
-  void _selectIsland(BuildContext context, int value) {
+  void _updateIsland() {
     final read = Provider.of<UserProvider>(context, listen: false);
 
+    Island island = islands[_valueNotifier.value - 1];
+
+    read.updateUserIsland(User(island: island));
+  }
+
+  void _selectIsland(int value) {
+    _updateIsland();
+
     setState(() => selectedIslandName = islands[value].island.name);
-    read.updateUserIsland(User(island: islands[_valueNotifier.value - 1]));
   }
 
   void _setIsland(BuildContext context) {
-    final read = Provider.of<UserProvider>(context, listen: false);
-
-    read.updateUserIsland(User(island: islands[_valueNotifier.value - 1]));
+    _updateIsland();
 
     Navigator.push(
       context,
@@ -73,8 +78,6 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final watch = context.watch<UserProvider>().user.description;
-    // print(watch);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(),
@@ -103,7 +106,7 @@ class _SelectIslandScreenState extends State<SelectIslandScreen> {
               itemBuilder: (context, int value) {
                 return GestureDetector(
                   dragStartBehavior: DragStartBehavior.down,
-                  onTapUp: (details) => _selectIsland(context, value),
+                  onTapUp: (details) => _selectIsland(value),
                   child: IslandViewPage(
                     props: islands[value],
                     isSelected:
