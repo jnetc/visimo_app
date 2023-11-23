@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/models/island.dart';
-import 'package:flutter_visimo/theme/colors.dart';
 
 class IslandModal extends StatelessWidget {
   const IslandModal({
@@ -24,7 +23,7 @@ class IslandModal extends StatelessWidget {
             width: 350,
             height: 350,
             colorBlendMode: BlendMode.multiply,
-            color: VisimoColors.lightSurface,
+            color: Theme.of(context).colorScheme.surface,
             fit: BoxFit.contain,
           ),
           const SizedBox(height: size24),

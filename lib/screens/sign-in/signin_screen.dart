@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // COMPONENTS
 import 'package:flutter_visimo/icons/icons.dart';
 import 'package:flutter_visimo/screens/create-account/01-username/username_screen.dart';
@@ -39,16 +40,17 @@ class SignInScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const HeadlineLarge(text: 'Login to your\naccount'),
+            HeadlineLarge(
+                text: AppLocalizations.of(context)!.signin_page_title),
             const SizedBox(height: 48),
             VisimoMainButton(
-              buttonName: 'Continue with Google',
+              buttonName: AppLocalizations.of(context)!.btn_txt__google,
               handler: () => _signInWithAccounts(context),
               hasIcon: googleAccountIcon,
             ),
             const SizedBox(height: 18),
             VisimoMainButton(
-              buttonName: 'Continue with Apple',
+              buttonName: AppLocalizations.of(context)!.btn_txt__apple,
               handler: () => _signInWithAccounts(context),
               hasIcon: appleAccountIcon,
             ),
@@ -56,15 +58,15 @@ class SignInScreen extends StatelessWidget {
             const DividerWithText(),
             const SizedBox(height: 32),
             VisimoMainButton(
-              buttonName: 'Phone number',
+              buttonName: AppLocalizations.of(context)!.btn_txt__phone,
               handler: () => _signInWithPhone(context),
               hasIcon: phoneIcon,
             ),
             const SizedBox(height: 24),
-            const SwitchBetweenSignInSignUp(
-              text: 'Don\'t have an account yet?',
-              anchorName: 'Sign Up',
-              widget: SignUpScreen(),
+            SwitchBetweenSignInSignUp(
+              text: AppLocalizations.of(context)!.txt__dont_have_account,
+              anchorName: AppLocalizations.of(context)!.link_signup,
+              widget: const SignUpScreen(),
             ),
           ],
         ),

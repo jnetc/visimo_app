@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // COMPONENTS
 import 'package:flutter_visimo/icons/icons.dart';
 import 'package:flutter_visimo/screens/create-account/01-username/username_screen.dart';
@@ -49,16 +50,17 @@ class SignUpScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const HeadlineLarge(text: 'Create a new\naccount'),
+            HeadlineLarge(
+                text: AppLocalizations.of(context)!.signin_page_title),
             const SizedBox(height: 48),
             VisimoMainButton(
-              buttonName: 'Continue with Google',
+              buttonName: AppLocalizations.of(context)!.btn_txt__google,
               handler: () => _signUpWithAccounts(context),
               hasIcon: googleAccountIcon,
             ),
             const SizedBox(height: 18),
             VisimoMainButton(
-              buttonName: 'Continue with Apple',
+              buttonName: AppLocalizations.of(context)!.btn_txt__apple,
               handler: () => _signUpWithAccounts(context),
               hasIcon: appleAccountIcon,
             ),
@@ -66,15 +68,15 @@ class SignUpScreen extends StatelessWidget {
             const DividerWithText(),
             const SizedBox(height: 32),
             VisimoMainButton(
-              buttonName: 'Phone number',
+              buttonName: AppLocalizations.of(context)!.btn_txt__phone,
               handler: () => _signUpWithPhone(context),
               hasIcon: phoneIcon,
             ),
             const SizedBox(height: 24),
-            const SwitchBetweenSignInSignUp(
-              text: 'Already have an account?',
-              anchorName: 'Sign In',
-              widget: SignInScreen(),
+            SwitchBetweenSignInSignUp(
+              text: AppLocalizations.of(context)!.txt__already_have_account,
+              anchorName: AppLocalizations.of(context)!.link_signin,
+              widget: const SignInScreen(),
             ),
             const Spacer(),
             const TermsAndPolicy(),

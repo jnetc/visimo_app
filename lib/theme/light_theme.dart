@@ -8,27 +8,28 @@ final lightTheme = ThemeData(
     backgroundColor: Colors.transparent,
     centerTitle: true,
     elevation: 0,
+    surfaceTintColor: Colors.transparent,
   ),
   // brightness: Brightness.light,
   // scaffoldBackgroundColor: Body background-color
-  // colorScheme: ColorScheme.fromSeed(seedColor: VisimoColors.lightBackdrop),
+  // colorScheme: ColorScheme.fromSeed(seedColor: VisimoColors.lightBackground),
   // colorScheme: ColorScheme.fromSwatch(backgroundColor: ),
   primaryColor: VisimoColors.lightYellow,
 
   colorScheme: ColorScheme.fromSeed(
-    seedColor: VisimoColors.lightBackdrop,
+    seedColor: VisimoColors.lightBackground,
+    background: VisimoColors.lightBackground,
     primary: VisimoColors.lightYellow,
     onPrimary: VisimoColors.lightYellowAlt,
-    error: VisimoColors.lightRed,
-    onError: VisimoColors.lightRedAlt,
     secondary: VisimoColors.lightGreen,
     onSecondary: VisimoColors.lightGreenAlt,
     tertiary: VisimoColors.lightBlue,
     onTertiary: VisimoColors.lightBlueAlt,
+    error: VisimoColors.lightRed,
+    onError: VisimoColors.lightRedAlt,
     surface: VisimoColors.lightSurface,
-    background: VisimoColors.lightBackdrop,
   ),
-  scaffoldBackgroundColor: VisimoColors.lightBackdrop,
+  scaffoldBackgroundColor: VisimoColors.lightBackground,
 
   // primaryColor: ColorSwatch(VisimoColors.lightYellow.value, color),
 
@@ -95,7 +96,4 @@ final lightTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
   ),
-  // extensions: const <ThemeExtension<dynamic>>[
-  //   VisimoStyle.light,
-  // ],
 );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // need for orientation
+// import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter_visimo/screens/start/start_screen.dart';
 import 'package:flutter_visimo/theme/dark_theme.dart';
@@ -33,12 +35,20 @@ class _VisimoState extends State<Visimo> {
   }
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
-
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale('en', 'EN'),
       // debugShowCheckedModeBanner: false,
       // home: Test(
       //   key: UniqueKey(),

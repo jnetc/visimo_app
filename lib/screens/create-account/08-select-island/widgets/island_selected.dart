@@ -10,7 +10,7 @@ class IslandSelected extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      color: VisimoColors.lightBackdrop,
+      color: VisimoColors.lightBackground,
       width: double.infinity,
       child: const Text(
         'Selected',

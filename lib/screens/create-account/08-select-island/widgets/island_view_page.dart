@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/extensions/capitalize.dart';
 import 'package:flutter_visimo/models/island.dart';
-import 'package:flutter_visimo/theme/colors.dart';
 
 import 'island_modal.dart';
 import 'island_selected.dart';
@@ -37,7 +36,7 @@ class IslandViewPage extends StatelessWidget {
                 // width: 350,
                 // height: 350,
                 colorBlendMode: BlendMode.multiply,
-                color: VisimoColors.lightBackdrop,
+                color: Theme.of(context).colorScheme.background,
                 fit: BoxFit.cover,
               ),
               if (isSelected) const IslandSelected(),
@@ -59,14 +58,14 @@ class IslandViewPage extends StatelessWidget {
                 const TextSpan(text: '... '),
                 TextSpan(
                   text: 'Read more',
-                  style: const TextStyle(
-                    color: VisimoColors.lightYellowAlt,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
                     fontWeight: FontWeight.bold,
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       showModalBottomSheet(
-                        backgroundColor: VisimoColors.lightSurface,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
                         elevation: 0,
                         isScrollControlled: true,
                         showDragHandle: true,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:flutter_visimo/assets/constants.dart';
-import 'package:flutter_visimo/theme/colors.dart';
 import 'package:flutter_visimo/providers/user_provider.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/texts/title_large.dart';
-import 'package:provider/provider.dart';
 
 class AccountCreatedScreen extends StatelessWidget {
   const AccountCreatedScreen({super.key});
@@ -26,13 +26,12 @@ class AccountCreatedScreen extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const HeadlineLarge(text: 'Account\nsuccessfully\ncreated'),
             Image.asset(
               'assets/illustrations/account-created.png',
               colorBlendMode: BlendMode.multiply,
-              color: VisimoColors.lightBackdrop,
+              color: Theme.of(context).colorScheme.background,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

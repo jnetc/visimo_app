@@ -1,0 +1,22 @@
+{
+  "link_signin": "Kirjaudu",
+  "link_signup": "Rekisteröidy",
+
+  "divider_OR": "TAI",
+  "or": " tai ",
+
+  "btn_txt__google": "Jatka Googlella",
+  "btn_txt__apple": "Jatka Apple",
+  "btn_txt__phone": "Puhelin number",
+  "btn_txt__create_account": "Luo tili",
+
+  "txt__already_have_account": "Onko sinulla jo tili?",
+  "txt__dont_have_account": "Eikö sinulla ole vielä tiliä?",
+
+  "login_page_title": "Luo uusi\naccount",
+  "signin_page_title": "Kirjaudu\ntilillesi",
+
+  "terms_and_privacy": "Napauttamalla next luot tilin ja hyväksyt vierailun toukokuussa ",
+  "link_terms": "palveluskaudet",
+  "link_privacy": "tietosuojakäytäntö."
+}

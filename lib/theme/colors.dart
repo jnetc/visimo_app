@@ -36,7 +36,7 @@ extension VisimoColors on Color {
   static const Color grey900 = Color(0xFF212121);
 
   // VISIMO LIGHT THEME COLORS
-  static const Color lightBackdrop = Color(0xFFF3E3D2);
+  static const Color lightBackground = Color(0xFFF3E3D2);
   static const Color lightSurface = Color(0xFFFCF4F0);
   static const Color lightYellow = Color(0xFFEBA91F);
   static const Color lightYellowAlt = Color(0xFFBD7331);
@@ -48,7 +48,7 @@ extension VisimoColors on Color {
   static const Color lightRedAlt = Color(0xFFDC5C1D);
 
   // VISIMO DARK THEME COLORS
-  static const Color darkBackdrop = Color(0xFF002039);
+  static const Color darkBackground = Color(0xFF002039);
   static const Color darkSurface = Color(0xFF0F3D61);
   static const Color darkYellow = Color(0xFFFDD887);
   static const Color darkYellowAlt = Color(0xFFBF7331);
