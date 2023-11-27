@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter_visimo/screens/policy/policy_screen.dart';
 import 'package:flutter_visimo/screens/terms/terms_screen.dart';
 
@@ -31,21 +33,20 @@ class _TermsAndPolicyState extends State<TermsAndPolicy> {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        text:
-            'By tapping next you are creating an account and you agree to the Visimo Oy ',
+        text: AppLocalizations.of(context)!.terms_and_privacy,
         style: Theme.of(context).textTheme.bodySmall,
         children: [
           TextSpan(
-            text: 'term’s of service',
+            text: AppLocalizations.of(context)!.link_terms,
             style: const TextStyle(
               decoration: TextDecoration.underline,
               fontWeight: FontWeight.bold,
             ),
             recognizer: _onTabTermsOfServices,
           ),
-          const TextSpan(text: ' and '),
+          TextSpan(text: AppLocalizations.of(context)!.or),
           TextSpan(
-            text: 'privacy policy.',
+            text: AppLocalizations.of(context)!.link_privacy,
             style: const TextStyle(
               decoration: TextDecoration.underline,
               fontWeight: FontWeight.bold,

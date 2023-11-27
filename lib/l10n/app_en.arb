@@ -1,0 +1,25 @@
+{
+  "link_signin": "Sign In",
+  "link_signup": "Sign Up",
+
+  "divider_OR": "OR",
+  "or": " or ",
+
+  "btn_txt__google": "Continue with Google",
+  "btn_txt__apple": "Continue with Apple",
+  "btn_txt__phone": "Phone number",
+
+  "btn_txt__create_account": "Create account",
+  "@btn_txt__create_account": {
+    "description": "Start page"
+  },
+  "txt__already_have_account": "Already have an account?",
+  "txt__dont_have_account": "Don't have an account yet?",
+
+  "signup_page_title": "Create a new\naccount",
+  "signin_page_title": "Login to your\naccount",
+
+  "terms_and_privacy": "By tapping next you are creating an account and you agree to the Visimo Oy ",
+  "link_terms": "term’s of service",
+  "link_privacy": "privacy policy."
+}
