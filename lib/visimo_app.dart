@@ -1,11 +1,39 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:flutter/services.dart'; // need for orientation
 // import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_visimo/boxes.dart';
+import 'package:flutter_visimo/providers/user_provider.dart';
 
 import 'package:flutter_visimo/screens/start/start_screen.dart';
 import 'package:flutter_visimo/theme/dark_theme.dart';
 import 'package:flutter_visimo/theme/light_theme.dart';
+import 'package:provider/provider.dart';
+
+import 'storage/preferences.dart';
+
+// class UpdateHive {
+//   static String updateHive({String? value}) {
+//     final box = preferencesBox.get('language');
+//     print('box_value ${box?.language}');
+//     String lang = Platform.localeName.split("_")[0];
+
+//     if (box == null) {
+//       preferencesBox.put('language', Preferences(language: lang));
+
+//       return lang;
+//     }
+
+//     if (box.language == value || value == null) return box.language;
+
+//     preferencesBox.put('language', Preferences(language: value));
+
+//     print('VALUE $value BOX ${box.language}');
+
+//     return value;
+//   }
+// }
 
 class Visimo extends StatefulWidget {
   const Visimo({super.key});
@@ -16,14 +44,44 @@ class Visimo extends StatefulWidget {
 
 class _VisimoState extends State<Visimo> {
   bool isDarkTheme = false;
+  bool isLangChanged = false;
   void toggle() => setState(() => isDarkTheme = !isDarkTheme);
+
+  String locale = 'fi';
+  // final localeValue = Platform.localeName.split("_")[0];
+
+  // final box = preferencesBox.get('language');
+
+  // final String locale = box!.language.isEmpty ? localeValue : box.language;
 
   @override
   void initState() {
-    super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    // String locale = "";
+
+    // if (box == null) {
+    //   setState(() {
+    //     locale = localeValue;
+    //   });
+    //   return;
+    // }
+
+    // if (box!.language == locale) {
+    //   return;
+    // }
+
+    // setState(() {
+    //   locale = box!.language;
+    //   preferencesBox.put('language', Preferences(language: locale));
+    // });
+
+    // setState(() {
+    //   locale = UpdateHive.updateHive();
+    // });
+    // print(locale);
+    super.initState();
   }
 
   @override
@@ -36,19 +94,29 @@ class _VisimoState extends State<Visimo> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
+    // setState(() {
+    //   locale = UpdateHive.updateHive();
+    // });
+    // final updatedBox = preferencesBox.get('language');
+    // setState(() {
+    //   locale = updatedBox!.language;
+    // });
+    // print('app $locale');
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    final watch = context.watch<HiveProvider>().preferences.language;
+
+    print(watch);
     return MaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: const Locale('en', 'EN'),
+      locale: Locale(watch, watch.toUpperCase()),
       // debugShowCheckedModeBanner: false,
       // home: Test(
       //   key: UniqueKey(),

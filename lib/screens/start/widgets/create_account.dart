@@ -11,7 +11,7 @@ class CreateAccount extends StatelessWidget {
     return Localizations.override(
       context: context,
       child: VisimoMainButton(
-        buttonName: AppLocalizations.of(context)!.link_signin,
+        buttonName: AppLocalizations.of(context)!.btn_txt__create_account,
         // buttonName: 'Create account',
         color: Theme.of(context).buttonTheme.colorScheme!.primary,
         handler: () => Navigator.push(
