@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_visimo/theme/colors.dart';
 
+import 'visimo_main_button_container.dart';
+
 class VisimoMainButton extends StatefulWidget {
   const VisimoMainButton({
     super.key,
@@ -9,6 +11,7 @@ class VisimoMainButton extends StatefulWidget {
     required this.handler,
     this.hasIcon,
     this.color,
+    this.isLoading = false,
     this.isDisabled = false,
   });
 
@@ -16,6 +19,7 @@ class VisimoMainButton extends StatefulWidget {
   final Color? color;
   final SvgPicture? hasIcon;
   final VoidCallback handler;
+  final bool isLoading;
   final bool isDisabled;
 
   @override
@@ -27,19 +31,21 @@ class _VisimoMainButtonState extends State<VisimoMainButton> {
   double transform = 0;
   double shifted = 2;
 
-  void onPressButton() {
+  void onPressTab() async {
     setState(() {
       transform += shifted;
       offset -= shifted;
     });
 
-    Future.delayed(
-      const Duration(milliseconds: 300),
-      () => setState(() {
-        transform = 0;
-        offset = 5;
-      }),
-    );
+    await Future.delayed(const Duration(milliseconds: 200));
+
+    setState(() {
+      transform = 0;
+      offset = 5;
+    });
+
+    await Future.delayed(const Duration(milliseconds: 100));
+    widget.handler();
   }
 
   @override
@@ -59,86 +65,16 @@ class _VisimoMainButtonState extends State<VisimoMainButton> {
       textColor = VisimoColors.grey800;
     }
 
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 100),
-      constraints: const BoxConstraints(maxHeight: 66),
-      width: double.infinity,
-      curve: Curves.easeInOut,
-      transform: Matrix4.translationValues(0, transform, 0),
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 2,
-          style: BorderStyle.solid,
-          color: widget.isDisabled ? VisimoColors.grey500 : VisimoColors.black,
-        ),
-        color: color,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: widget.isDisabled
-            ? null
-            : [
-                BoxShadow(
-                  offset: Offset(offset, offset),
-                  color: VisimoColors.black,
-                ),
-              ],
-      ),
-      child: Material(
-        color: VisimoColors.transparent,
-        child: InkWell(
-          onTap: widget.isDisabled ? null : widget.handler,
-          onTapDown: widget.isDisabled ? null : (details) => onPressButton(),
-          splashColor: widget.color != null
-              ? Theme.of(context).scaffoldBackgroundColor.withOpacity(.2)
-              : Theme.of(context).scaffoldBackgroundColor.withOpacity(.6),
-          splashFactory: InkRipple.splashFactory,
-          borderRadius: widget.hasIcon != null
-              ? BorderRadius.circular(8)
-              : BorderRadius.circular(12),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-                vertical: 18, horizontal: 12), // without
-            child: Stack(
-              alignment: Alignment.centerLeft,
-              children: [
-                if (widget.hasIcon != null) widget.hasIcon!,
-                Center(
-                  child: Text(
-                    widget.buttonName,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                // if (widget.icon != null) const SizedBox(width: 32, height: 32)
-              ],
-            ),
-            // child: Row(
-            //   crossAxisAlignment: CrossAxisAlignment.center,
-            //   mainAxisAlignment: widget.icon != null
-            //       ? MainAxisAlignment.spaceBetween
-            //       : MainAxisAlignment.center,
-            //   children: [
-            //     if (widget.icon != null) widget.icon!,
-            //     Text(
-            //       widget.buttonName,
-            //       textAlign: TextAlign.center,
-            //       style: TextStyle(
-            //         color: widget.icon != null
-            //             ? VisimoColors.grey800
-            //             : VisimoColors.black,
-            //         fontSize: 18,
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //     // if (widget.icon != null) const SizedBox(width: 32, height: 32)
-            //   ],
-            // ),
-          ),
-        ),
-      ),
+    return VisimoMainButtonContainer(
+      buttonName: widget.buttonName,
+      handler: onPressTab,
+      hasIcon: widget.hasIcon,
+      color: color,
+      textColor: textColor,
+      offset: offset,
+      transform: transform,
+      isLoading: widget.isLoading,
+      isDisabled: widget.isDisabled,
     );
   }
 }

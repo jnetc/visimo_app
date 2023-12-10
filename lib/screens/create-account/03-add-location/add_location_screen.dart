@@ -21,6 +21,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
   final _controller = TextEditingController();
   // bool focusValue = false;
   String indicate = 'Find location';
+  bool isLoading = false;
   CurrentGeoLocation location = CurrentGeoLocation();
 
   @override
@@ -44,7 +45,8 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
   }
 
   void _getSity() async {
-    setState(() => indicate = 'Getting location');
+    // setState(() => indicate = 'Getting location');
+    setState(() => isLoading = true);
 
     try {
       final position = await determinePosition();
@@ -56,7 +58,8 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
       }
 
       setState(() {
-        indicate = 'Find location';
+        // indicate = 'Find location';
+        isLoading = false;
         location.latitude = position.latitude;
         location.longitude = position.longitude;
         _controller.text =
@@ -115,6 +118,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
             VisimoMainButton(
               buttonName: indicate,
               hasIcon: locationIcon,
+              isLoading: isLoading,
               handler: _getSity,
             ),
             const Spacer(),

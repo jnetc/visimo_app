@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_visimo/theme/colors.dart';
-// import 'package:flutter_visimo/theme/extension_theme.dart';
-// import 'package:flutter_visimo/visimo_app.dart';
 
 final darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(

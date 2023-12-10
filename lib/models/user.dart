@@ -1,4 +1,4 @@
-import 'package:flutter_visimo/models/customizable_visic.dart';
+import 'package:flutter_visimo/models/visic.dart';
 import 'package:flutter_visimo/models/island.dart';
 import 'package:uuid/v4.dart';
 
@@ -23,7 +23,7 @@ class User {
   String? description;
   String? skills;
   List<String>? portfolioLinks;
-  CustomizableVisic? visic;
+  Visic? visic;
   Island? island;
 }
 

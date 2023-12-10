@@ -90,9 +90,19 @@ final lightTheme = ThemeData(
       fontSize: 36,
       fontWeight: FontWeight.bold,
     ),
+    titleLarge: TextStyle(
+      color: VisimoColors.grey800,
+      fontSize: 36,
+      fontWeight: FontWeight.bold,
+    ),
     titleMedium: TextStyle(
       color: VisimoColors.grey800,
       fontSize: 24,
+      fontWeight: FontWeight.bold,
+    ),
+    titleSmall: TextStyle(
+      color: VisimoColors.grey800,
+      fontSize: 20,
       fontWeight: FontWeight.bold,
     ),
   ),

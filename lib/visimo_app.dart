@@ -5,8 +5,10 @@ import 'package:flutter/services.dart'; // need for orientation
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_visimo/boxes.dart';
 import 'package:flutter_visimo/providers/user_provider.dart';
+import 'package:flutter_visimo/screens/create-account/07-create-visic/create_visic_screen.dart';
 
 import 'package:flutter_visimo/screens/start/start_screen.dart';
+import 'package:flutter_visimo/screens/world/world_screen.dart';
 import 'package:flutter_visimo/theme/dark_theme.dart';
 import 'package:flutter_visimo/theme/light_theme.dart';
 import 'package:provider/provider.dart';
@@ -121,12 +123,13 @@ class _VisimoState extends State<Visimo> {
       // home: Test(
       //   key: UniqueKey(),
       // ),
-      // home: const SelectIslandScreen(),
-      home: const StartScreen(
-          // toggle: toggle,
-          // UniqueKey(), Need to prevent error: "A GlobalKey was used multiple times inside one widget's child list"
-          // key: UniqueKey(),
-          ),
+      home: const WorldScreen(),
+      // home: const CreateVisicScreen(),
+      // home: const StartScreen(
+      //     // toggle: toggle,
+      //     // UniqueKey(), Need to prevent error: "A GlobalKey was used multiple times inside one widget's child list"
+      //     // key: UniqueKey(),
+      //     ),
     );
   }
 }

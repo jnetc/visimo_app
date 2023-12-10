@@ -76,6 +76,7 @@ flutter:
     - assets/images/
     - assets/islands/
     - assets/visic/
+    - assets/world/
     # - assets/icons/email.svg
     # - assets/icons/eye.svg
     # - assets/icons/eye-cloused.svg

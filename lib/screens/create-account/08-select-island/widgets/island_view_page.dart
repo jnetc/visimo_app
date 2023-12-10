@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/extensions/capitalize.dart';
 import 'package:flutter_visimo/models/island.dart';
+import 'package:flutter_visimo/screens/create-account/widgets/selected.dart';
 
 import 'island_modal.dart';
 import 'island_selected.dart';
@@ -39,7 +40,7 @@ class IslandViewPage extends StatelessWidget {
                 color: Theme.of(context).colorScheme.background,
                 fit: BoxFit.cover,
               ),
-              if (isSelected) const IslandSelected(),
+              if (isSelected) const Selected(),
             ],
           ),
         ),
