@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_visimo/boxes.dart';
+// import 'package:flutter_visimo/boxes.dart';
 import 'package:flutter_visimo/models/user.dart';
 import 'package:flutter_visimo/storage/preferences.dart';
 
@@ -28,7 +28,7 @@ class HiveProvider extends ChangeNotifier {
     // preferencesBox.put('language', Preferences(language: value));
 
     // print('VALUE $value BOX ${box.language}');
-    print('Provider $value');
+    // print('Provider $value');
     notifyListeners();
   }
 }

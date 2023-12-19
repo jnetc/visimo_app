@@ -8,7 +8,7 @@ import 'package:flutter_visimo/screens/create-account/01-username/username_scree
 import 'package:flutter_visimo/screens/phone-verifications/phone_number_screen.dart';
 import 'package:flutter_visimo/screens/sign-up/signup_screen.dart';
 import 'package:flutter_visimo/storage/preferences.dart';
-import 'package:flutter_visimo/visimo_app.dart';
+// import 'package:flutter_visimo/visimo_app.dart';
 import 'package:flutter_visimo/widgets/screen-elements/visimo_txt_and_anchor.dart';
 import 'package:flutter_visimo/widgets/buttons/visimo_main_button.dart';
 import 'package:flutter_visimo/widgets/dividers/divider_with_txt.dart';
@@ -76,7 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
               setState(() {
                 // var box2 = preferencesBox.get('language');
                 // if (box2 == null) return;
-                print('Tab $getLocaleFromValue(value)');
+                // print('Tab $getLocaleFromValue(value)');
                 language = value;
               });
             },

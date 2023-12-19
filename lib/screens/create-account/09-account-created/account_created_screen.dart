@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_visimo/screens/world/world_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_visimo/assets/constants.dart';
@@ -13,7 +14,7 @@ class AccountCreatedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final watch = context.watch<UserProvider>().user;
 
-    print(watch.username);
+    // print(watch.username);
 
     return Scaffold(
       appBar: AppBar(surfaceTintColor: Colors.transparent),
@@ -52,7 +53,14 @@ class AccountCreatedScreen extends StatelessWidget {
               buttonName: 'Start your journey',
               isDisabled: false,
               color: Theme.of(context).buttonTheme.colorScheme!.primary,
-              handler: () {},
+              handler: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WorldScreen(),
+                  ),
+                );
+              },
             ),
           ],
         ),

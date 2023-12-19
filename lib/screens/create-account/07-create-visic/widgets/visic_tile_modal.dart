@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 
 import 'package:flutter_visimo/assets/constants.dart';
 import 'package:flutter_visimo/models/visic.dart';
@@ -27,6 +27,7 @@ class VisicTileModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        if (visic.type == 'locked') return;
         showModalBottomSheet(
           backgroundColor: Theme.of(context).colorScheme.surface,
           elevation: 0,
@@ -44,7 +45,10 @@ class VisicTileModal extends StatelessWidget {
                   Expanded(
                     child: ListView(
                       padding: const EdgeInsets.only(
-                          left: size16, top: size16, right: size16),
+                        left: size16,
+                        top: size16,
+                        right: size16,
+                      ),
                       shrinkWrap: true,
                       children: [
                         Text(
@@ -59,7 +63,12 @@ class VisicTileModal extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         const SizedBox(height: size32),
-                        SvgPicture.asset(visic.image),
+                        Image.asset(
+                          visic.image,
+                          width: 200,
+                          height: 200,
+                          fit: BoxFit.contain,
+                        ),
                         const SizedBox(height: size32),
                         Text(
                           visic.description,

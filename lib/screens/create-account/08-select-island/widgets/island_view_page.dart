@@ -7,7 +7,6 @@ import 'package:flutter_visimo/models/island.dart';
 import 'package:flutter_visimo/screens/create-account/widgets/selected.dart';
 
 import 'island_modal.dart';
-import 'island_selected.dart';
 
 class IslandViewPage extends StatelessWidget {
   const IslandViewPage({

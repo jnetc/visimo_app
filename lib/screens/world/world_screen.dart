@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_visimo/screens/world/world_map.dart';
 
 class WorldScreen extends StatefulWidget {
@@ -191,7 +191,7 @@ class _WorldScreenState extends State<WorldScreen>
       ),
       floatingActionButton: IconButton(
         onPressed: () {
-          print('TAB');
+          // print('TAB');
           goToHome(mapXPos, mapYPos);
         },
         color: Colors.white,
